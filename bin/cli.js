@@ -12,6 +12,7 @@ program
     .option('-o, --output <file>', 'dump to file instead of stdout')
     .option('-c, --content', 'also capture the requests body')
     .option('-d, --delay <ms>', 'time to wait after the load event')
+	.option('--no-network-cache', 'set cache-control header to no-cache')
     .option('-v, --verbose', 'enable verbose output on stderr')
     .parse(process.argv);
 
@@ -26,7 +27,8 @@ var c = chc.load(urls, {
     'host': program.host,
     'port': program.port,
     'fetchContent': program.content,
-    'onLoadDelay': program.delay
+    'onLoadDelay': program.delay,
+	'noNetworkCache': !program.networkCache
 });
 
 if (program.verbose) {
